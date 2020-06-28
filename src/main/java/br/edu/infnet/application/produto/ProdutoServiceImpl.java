@@ -26,7 +26,6 @@ public class ProdutoServiceImpl implements ProdutoService {
 
     @Override
     public List<Produto> buscarProdutos() {
-        log.info("!!! Buscando produtos...");
         return produtoRepository.findAll();
     }
 

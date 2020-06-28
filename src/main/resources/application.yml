@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: cotacao
+  datasource:
+    url: jdbc:mysql://localhost:3306/cotacao_db
+    username: root
+    password: root
+  mvc:
+    view:
+      prefix: /views/
+      suffix: .jsp
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update

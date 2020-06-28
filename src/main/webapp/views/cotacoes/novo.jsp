@@ -9,33 +9,51 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Sistema de Cotação</title>
+    <link rel="stylesheet" href="<c:url value="/assets/styles/styles.css"/>">
 </head>
 <body>
 
-    <h1>Nova cotação</h1>
-    <a href="<c:url value="/cotacoes"/>">Voltar</a>
+    <%@include file="../commons/header.jsp"%>
 
-    <form:form action="/cotacoes/novo" method="post" modelAttribute="novaCotacao">
+    <section class="section">
+        <header class="section__header">
+            <div class="container">
+                <h2>Nova cotação</h2>
+                <a href="<c:url value="/cotacoes"/>">Voltar</a>
+            </div>
+        </header>
 
-        <div>
-            <form:label path="idProduto">Produto:</form:label>
-            <form:select path="idProduto">
-                <form:option value="">-- Selecione um produto --</form:option>
-                <form:options items="${produtosDisponiveis}" itemValue="id" itemLabel="nome" />
-            </form:select>
-            <form:errors path="idProduto" />
+        <div class="section__content">
+            <div class="container">
+                <form:form action="/cotacoes/novo" method="post" modelAttribute="novaCotacao" cssClass="form">
+                    <div class="form__field">
+                        <form:label path="idProduto">Produto:</form:label>
+                        <form:select path="idProduto">
+                            <form:option value="">-- Selecione um produto --</form:option>
+                            <form:options items="${produtosDisponiveis}" itemValue="id" itemLabel="nome" />
+                        </form:select>
+                        <form:errors path="idProduto" />
+                    </div>
+
+                    <div class="form__field">
+                        <form:label path="valor">Valor:</form:label>
+                        <form:input path="valor" />
+                        <form:errors path="valor" />
+                    </div class="form__field">
+
+                    <div class="form__field">
+                        <form:label path="nomeCliente">Cliente:</form:label>
+                        <form:input path="nomeCliente" />
+                        <form:errors path="nomeCliente" />
+                    </div class="form__field">
+
+                    <div class="form__field">
+                        <button type="submit" class="button">Registrar</button>
+                        <button type="reset" class="button--secondary">Resetar</button>
+                    </div>
+                </form:form>
+            </div>
         </div>
-
-        <div>
-            <form:label path="">Valor:</form:label>
-            <form:input path="valor" />
-            <form:errors path="valor" />
-        </div>
-
-        <div>
-            <button type="submit">Registrar</button>
-            <button type="reset">Resetar</button>
-        </div>
-    </form:form>
+    </section>
 </body>
 </html>

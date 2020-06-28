@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.UUID;
 
 @Data
 @NoArgsConstructor
@@ -18,15 +17,17 @@ public class Cotacao implements Serializable {
     @GeneratedValue
     private Long id;
     private Long valor;
+    private Cliente cliente;
 
     @ManyToOne
     private Produto produto;
 
     private LocalDate dataCotacao;
 
-    public Cotacao(Long valor, Produto produto) {
+    public Cotacao(Long valor, Produto produto, String nomeCliente) {
         this.valor = valor;
         this.produto = produto;
+        this.cliente = new Cliente(nomeCliente);
         this.dataCotacao = LocalDate.now();
     }
 

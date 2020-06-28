@@ -8,26 +8,53 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Sistema de Cotação</title>
+    <link href="https://unpkg.com/vanilla-datatables@latest/dist/vanilla-dataTables.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="<c:url value="/assets/styles/styles.css"/>">
 </head>
 <body>
 
-    <h1>Produtos</h1>
-    <a href="<c:url value="/produtos/novo"/>">Novo produto</a>
+    <%@include file="../commons/header.jsp"%>
 
-    <c:choose>
-        <c:when test="${!empty produtos}">
-            <c:forEach var="produto" items="${produtos}">
-                <div>
-                    <h2>${produto.nome}</h2>
-                    <p>${produto.fornecedor.nomeFornecedor}</p>
-                </div>
-            </c:forEach>
-        </c:when>
+    <section class="section">
+        <header class="section__header">
+            <div class="container">
+                <h2 class="section__title">Produtos</h2>
+                <a href="<c:url value="/produtos/novo"/>" class="button">Novo produto</a>
+            </div>
+        </header>
 
-        <c:otherwise>
-            <p>Nenhum produto adicionada</p>
-        </c:otherwise>
-    </c:choose>
+        <section class="section__content">
+            <div class="container">
+                <table id="table">
+                    <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Fornecedor</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <c:choose>
+                        <c:when test="${!empty produtos}">
+                            <c:forEach var="produto" items="${produtos}">
+                                <tr>
+                                    <td>${produto.nome}</td>
+                                    <td>${produto.fornecedor.nomeFornecedor}</td>
+                                </tr>
+                            </c:forEach>
+                        </c:when>
+                        <c:otherwise>
+                            <p>Nenhuma cotação adicionada</p>
+                        </c:otherwise>
+                    </c:choose>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </section>
 
+    <script src="https://unpkg.com/vanilla-datatables@latest/dist/vanilla-dataTables.min.js" type="text/javascript"></script>
+    <script>
+        const table = new DataTable("#table");
+    </script>
 </body>
 </html>

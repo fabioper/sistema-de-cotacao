@@ -48,7 +48,7 @@ public class CotacoesController {
         if (result.hasErrors()) return "/cotacoes/novo";
 
         try {
-            cotacaoService.registrarCotacao(novaCotacao.getValor(), novaCotacao.getIdProduto());
+            cotacaoService.registrarCotacao(novaCotacao.getValor(), novaCotacao.getIdProduto(), novaCotacao.getNomeCliente());
         } catch (ProdutoNaoEncontradoException e) {
             log.info("Produto <{}> não foi encontrado", novaCotacao.getIdProduto());
             e.printStackTrace();

@@ -1,6 +1,5 @@
 package br.edu.infnet.application.cotacao;
 
-import br.edu.infnet.application.exceptions.CotacaoNaoEncontradaException;
 import br.edu.infnet.application.exceptions.ProdutoNaoEncontradoException;
 import br.edu.infnet.domain.Cotacao;
 import br.edu.infnet.domain.Produto;
@@ -20,11 +19,11 @@ public class CotacaoServiceImpl implements CotacaoService {
     private final ProdutoRepository produtoRepository;
 
     @Override
-    public void registrarCotacao(Long valorCotacao, Long idProduto) throws ProdutoNaoEncontradoException {
+    public void registrarCotacao(Long valorCotacao, Long idProduto, String nomeCliente) throws ProdutoNaoEncontradoException {
         Produto produto = produtoRepository.findById(idProduto)
                 .orElseThrow(ProdutoNaoEncontradoException::new);
 
-        Cotacao cotacao = new Cotacao(valorCotacao, produto);
+        Cotacao cotacao = new Cotacao(valorCotacao, produto, nomeCliente);
 
         cotacaoRepository.save(cotacao);
         produtoRepository.save(produto);
@@ -33,18 +32,5 @@ public class CotacaoServiceImpl implements CotacaoService {
     @Override
     public List<Cotacao> buscarCotacoes() {
         return cotacaoRepository.findAll();
-    }
-
-    @Override
-    public Cotacao buscarCotacaoPorId(Long idCotacao) throws CotacaoNaoEncontradaException {
-        return cotacaoRepository.findById(idCotacao)
-                .orElseThrow(CotacaoNaoEncontradaException::new);
-    }
-
-    @Override
-    public List<Cotacao> buscarCotacaoPorProduto(Long idProduto) throws ProdutoNaoEncontradoException {
-        Produto produto = produtoRepository.findById(idProduto)
-                .orElseThrow(ProdutoNaoEncontradoException::new);
-        return cotacaoRepository.findCotacaoByProduto(produto);
     }
 }

@@ -7,14 +7,13 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Repository
-public interface ProdutoRepository extends CrudRepository<Produto, UUID> {
+public interface ProdutoRepository extends CrudRepository<Produto, Long> {
 
     List<Produto> findAll();
 
-    Optional<Produto> findById(UUID id);
+    Optional<Produto> findById(Long id);
 
     List<Produto> findAllByFornecedor(Fornecedor fornecedor);
 }

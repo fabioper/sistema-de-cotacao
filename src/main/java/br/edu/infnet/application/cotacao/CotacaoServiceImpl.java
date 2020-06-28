@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor(onConstructor = @__({ @Autowired }))
@@ -21,7 +20,7 @@ public class CotacaoServiceImpl implements CotacaoService {
     private final ProdutoRepository produtoRepository;
 
     @Override
-    public void registrarCotacao(Long valorCotacao, UUID idProduto) throws ProdutoNaoEncontradoException {
+    public void registrarCotacao(Long valorCotacao, Long idProduto) throws ProdutoNaoEncontradoException {
         Produto produto = produtoRepository.findById(idProduto)
                 .orElseThrow(ProdutoNaoEncontradoException::new);
 
@@ -37,13 +36,13 @@ public class CotacaoServiceImpl implements CotacaoService {
     }
 
     @Override
-    public Cotacao buscarCotacaoPorId(UUID idCotacao) throws CotacaoNaoEncontradaException {
+    public Cotacao buscarCotacaoPorId(Long idCotacao) throws CotacaoNaoEncontradaException {
         return cotacaoRepository.findById(idCotacao)
                 .orElseThrow(CotacaoNaoEncontradaException::new);
     }
 
     @Override
-    public List<Cotacao> buscarCotacaoPorProduto(UUID idProduto) throws ProdutoNaoEncontradoException {
+    public List<Cotacao> buscarCotacaoPorProduto(Long idProduto) throws ProdutoNaoEncontradoException {
         Produto produto = produtoRepository.findById(idProduto)
                 .orElseThrow(ProdutoNaoEncontradoException::new);
         return cotacaoRepository.findCotacaoByProduto(produto);

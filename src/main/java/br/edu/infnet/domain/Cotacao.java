@@ -1,18 +1,22 @@
 package br.edu.infnet.domain;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.UUID;
 
 @Data
+@NoArgsConstructor
 @Entity
 @Table(name = "cotacoes")
-public class Cotacao {
+public class Cotacao implements Serializable {
 
     @Id
-    private UUID id;
+    @GeneratedValue
+    private Long id;
     private Long valor;
 
     @ManyToOne
@@ -21,7 +25,6 @@ public class Cotacao {
     private LocalDate dataCotacao;
 
     public Cotacao(Long valor, Produto produto) {
-        this.id = UUID.randomUUID();
         this.valor = valor;
         this.produto = produto;
         this.dataCotacao = LocalDate.now();

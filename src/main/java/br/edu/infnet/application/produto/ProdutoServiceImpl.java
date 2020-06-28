@@ -5,17 +5,18 @@ import br.edu.infnet.domain.Fornecedor;
 import br.edu.infnet.domain.Produto;
 import br.edu.infnet.infra.ProdutoRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.UUID;
 
 @Service
-@RequiredArgsConstructor(onConstructor = @__({ @Autowired }))
+@Slf4j
+@RequiredArgsConstructor(onConstructor = @__({@Autowired}))
 public class ProdutoServiceImpl implements ProdutoService {
 
-    private ProdutoRepository produtoRepository;
+    private final ProdutoRepository produtoRepository;
 
     @Override
     public void registrarProduto(String nomeProduto, String fornecedor) {
@@ -25,6 +26,7 @@ public class ProdutoServiceImpl implements ProdutoService {
 
     @Override
     public List<Produto> buscarProdutos() {
+        log.info("!!! Buscando produtos...");
         return produtoRepository.findAll();
     }
 
@@ -34,7 +36,7 @@ public class ProdutoServiceImpl implements ProdutoService {
     }
 
     @Override
-    public Produto buscarProdutoPorId(UUID idProduto) throws ProdutoNaoEncontradoException {
+    public Produto buscarProdutoPorId(Long idProduto) throws ProdutoNaoEncontradoException {
         return produtoRepository.findById(idProduto)
                 .orElseThrow(ProdutoNaoEncontradoException::new);
     }

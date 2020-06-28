@@ -1,10 +1,12 @@
 package br.edu.infnet.domain;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Embeddable;
 
 @Data
+@NoArgsConstructor
 @Embeddable
 public class Fornecedor {
 

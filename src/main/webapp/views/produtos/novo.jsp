@@ -12,24 +12,20 @@
 </head>
 <body>
 
-    <h1>Nova cotação</h1>
-    <a href="<c:url value="/cotacoes"/>">Voltar</a>
+    <h1>Novo produto</h1>
+    <a href="<c:url value="/produtos"/>">Voltar</a>
 
-    <form:form action="/cotacoes/novo" method="post" modelAttribute="novaCotacao">
-
+    <form:form action="/produtos/novo" method="post" modelAttribute="novoProduto">
         <div>
-            <form:label path="idProduto">Produto:</form:label>
-            <form:select path="idProduto">
-                <form:option value="">-- Selecione um produto --</form:option>
-                <form:options items="${produtosDisponiveis}" itemValue="id" itemLabel="nome" />
-            </form:select>
-            <form:errors path="idProduto" />
+            <form:label path="nome">Nome:</form:label>
+            <form:input path="nome" />
+            <form:errors path="nome" />
         </div>
 
         <div>
-            <form:label path="">Valor:</form:label>
-            <form:input path="valor" />
-            <form:errors path="valor" />
+            <form:label path="fornecedor">Fornecedor:</form:label>
+            <form:input path="fornecedor" />
+            <form:errors path="fornecedor" />
         </div>
 
         <div>
@@ -37,5 +33,6 @@
             <button type="reset">Resetar</button>
         </div>
     </form:form>
+
 </body>
 </html>

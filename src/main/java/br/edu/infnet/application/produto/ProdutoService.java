@@ -4,7 +4,6 @@ import br.edu.infnet.application.exceptions.ProdutoNaoEncontradoException;
 import br.edu.infnet.domain.Produto;
 
 import java.util.List;
-import java.util.UUID;
 
 public interface ProdutoService {
 
@@ -14,6 +13,6 @@ public interface ProdutoService {
 
     List<Produto> buscarProdutosDeFornecedor(String nomeFornecedor);
 
-    Produto buscarProdutoPorId(UUID idProduto) throws ProdutoNaoEncontradoException;
+    Produto buscarProdutoPorId(Long idProduto) throws ProdutoNaoEncontradoException;
 
 }

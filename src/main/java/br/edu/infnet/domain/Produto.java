@@ -1,27 +1,27 @@
 package br.edu.infnet.domain;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.UUID;
 
 @Data
 @Entity
+@NoArgsConstructor
 @Table(name = "produtos")
-public class Produto {
+public class Produto implements Serializable {
 
     @Id
-    private UUID id;
+    @GeneratedValue
+    private Long id;
     private String nome;
 
     @Embedded
     private Fornecedor fornecedor;
 
     public Produto(String nomeProduto, String nomeFornecedor) {
-        this.id = UUID.randomUUID();
         this.nome = nomeProduto;
         this.fornecedor = new Fornecedor(nomeFornecedor);
     }

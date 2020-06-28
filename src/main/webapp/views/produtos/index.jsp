@@ -30,6 +30,7 @@
                     <tr>
                         <th>Nome</th>
                         <th>Fornecedor</th>
+                        <th>Ações</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -39,6 +40,9 @@
                                 <tr>
                                     <td>${produto.nome}</td>
                                     <td>${produto.fornecedor.nomeFornecedor}</td>
+                                    <td>
+                                        <a href="/produtos/${produto.id}/excluir">Excluir</a>
+                                    </td>
                                 </tr>
                             </c:forEach>
                         </c:when>

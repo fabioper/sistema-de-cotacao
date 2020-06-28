@@ -32,6 +32,7 @@
                         <th>Valor</th>
                         <th>Data</th>
                         <th>Cliente</th>
+                        <th>Ações</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -40,9 +41,12 @@
                             <c:forEach var="cotacao" items="${cotacoes}">
                                 <tr>
                                     <td>${cotacao.produto.nome}</td>
-                                    <td>${cotacao.valor}</td>
-                                    <td>${cotacao.dataCotacao}</td>
+                                    <td data-currency>${cotacao.valor}</td>
+                                    <td data-moment>${cotacao.dataCotacao}</td>
                                     <td>${cotacao.cliente.nomeCliente}</td>
+                                    <td>
+                                        <a href="/cotacoes/${cotacao.id}/excluir">Excluir</a>
+                                    </td>
                                 </tr>
                             </c:forEach>
                         </c:when>
@@ -56,9 +60,22 @@
         </div>
     </section>
 
-    <script src="https://unpkg.com/vanilla-datatables@latest/dist/vanilla-dataTables.min.js" type="text/javascript"></script>
+    <script src="https://unpkg.com/vanilla-datatables@latest/dist/vanilla-dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/locale/pt-br.min.js"></script>
     <script>
         const table = new DataTable("#table");
+        const dataMoment = document.querySelectorAll('[data-moment]')
+        const dataCurrency = document.querySelectorAll('[data-currency]')
+        dataMoment.forEach(data => {
+            moment.locale('br')
+            data.textContent = moment(data.textContent).fromNow()
+        })
+
+        dataCurrency.forEach(data => {
+            let opts = { style: 'currency', currency: 'BRL' };
+            data.textContent = new Intl.NumberFormat('pt-BR', opts).format(data.textContent);
+        })
     </script>
 </body>
 </html>

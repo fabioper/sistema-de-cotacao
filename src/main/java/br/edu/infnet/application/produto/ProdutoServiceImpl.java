@@ -40,4 +40,11 @@ public class ProdutoServiceImpl implements ProdutoService {
         return produtoRepository.findById(idProduto)
                 .orElseThrow(ProdutoNaoEncontradoException::new);
     }
+
+    @Override
+    public void excluirProduto(Long idProduto) throws ProdutoNaoEncontradoException {
+        Produto produto = produtoRepository.findById(idProduto)
+                .orElseThrow(ProdutoNaoEncontradoException::new);
+        produtoRepository.delete(produto);
+    }
 }

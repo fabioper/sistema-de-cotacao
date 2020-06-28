@@ -2,12 +2,14 @@ package br.edu.infnet.domain;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 
 @Data
+@Slf4j
 @NoArgsConstructor
 @Entity
 @Table(name = "cotacoes")
@@ -16,7 +18,7 @@ public class Cotacao implements Serializable {
     @Id
     @GeneratedValue
     private Long id;
-    private Long valor;
+    private Double valor;
     private Cliente cliente;
 
     @ManyToOne
@@ -24,7 +26,7 @@ public class Cotacao implements Serializable {
 
     private LocalDate dataCotacao;
 
-    public Cotacao(Long valor, Produto produto, String nomeCliente) {
+    public Cotacao(Double valor, Produto produto, String nomeCliente) {
         this.valor = valor;
         this.produto = produto;
         this.cliente = new Cliente(nomeCliente);

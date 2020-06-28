@@ -15,4 +15,5 @@ public interface ProdutoService {
 
     Produto buscarProdutoPorId(Long idProduto) throws ProdutoNaoEncontradoException;
 
+    void excluirProduto(Long idProduto) throws ProdutoNaoEncontradoException;
 }

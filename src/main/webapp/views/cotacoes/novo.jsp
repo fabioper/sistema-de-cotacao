@@ -37,7 +37,7 @@
 
                     <div class="form__field">
                         <form:label path="valor">Valor:</form:label>
-                        <form:input path="valor" />
+                        <form:input path="valor" type="number" min="1" step="any" />
                         <form:errors path="valor" />
                     </div class="form__field">
 

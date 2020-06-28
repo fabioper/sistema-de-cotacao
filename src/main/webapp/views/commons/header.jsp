@@ -2,7 +2,11 @@
 
 <header class="header">
     <div class="container">
-        <h1 class="logo">Sistema de Cotações</h1>
+            <h1 class="logo">
+                <a href="<c:url value="/"/>">
+                    Sistema de Cotações
+                </a>
+            </h1>
 
         <nav class="nav">
             <ul class="menu">

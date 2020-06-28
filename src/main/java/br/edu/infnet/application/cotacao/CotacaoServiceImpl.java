@@ -1,5 +1,6 @@
 package br.edu.infnet.application.cotacao;
 
+import br.edu.infnet.application.exceptions.CotacaoNaoEncontradaException;
 import br.edu.infnet.application.exceptions.ProdutoNaoEncontradoException;
 import br.edu.infnet.domain.Cotacao;
 import br.edu.infnet.domain.Produto;
@@ -19,7 +20,7 @@ public class CotacaoServiceImpl implements CotacaoService {
     private final ProdutoRepository produtoRepository;
 
     @Override
-    public void registrarCotacao(Long valorCotacao, Long idProduto, String nomeCliente) throws ProdutoNaoEncontradoException {
+    public void registrarCotacao(Double valorCotacao, Long idProduto, String nomeCliente) throws ProdutoNaoEncontradoException {
         Produto produto = produtoRepository.findById(idProduto)
                 .orElseThrow(ProdutoNaoEncontradoException::new);
 
@@ -32,5 +33,12 @@ public class CotacaoServiceImpl implements CotacaoService {
     @Override
     public List<Cotacao> buscarCotacoes() {
         return cotacaoRepository.findAll();
+    }
+
+    @Override
+    public void excluirCotacao(Long idCotacao) throws CotacaoNaoEncontradaException {
+        Cotacao cotacao = cotacaoRepository.findById(idCotacao)
+                .orElseThrow(CotacaoNaoEncontradaException::new);
+        cotacaoRepository.delete(cotacao);
     }
 }

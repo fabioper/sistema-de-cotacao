@@ -1,5 +1,6 @@
 package br.edu.infnet.presentation.controllers;
 
+import br.edu.infnet.application.exceptions.ProdutoNaoEncontradoException;
 import br.edu.infnet.application.produto.ProdutoService;
 import br.edu.infnet.presentation.dtos.RegistrarProdutoDto;
 import lombok.RequiredArgsConstructor;
@@ -7,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -40,5 +38,16 @@ public class ProdutosController {
 
         produtoService.registrarProduto(novoProduto.getNome(), novoProduto.getFornecedor());
         return "redirect:/produtos";
+    }
+
+    @GetMapping("/{id}/excluir")
+    private String excluirProduto(@PathVariable("id") Long idProduto, ModelMap model) {
+        try {
+            produtoService.excluirProduto(idProduto);
+            return "redirect:/produtos";
+        } catch (ProdutoNaoEncontradoException e) {
+            model.addAttribute("error", e.getMessage());
+            return "/produtos/index";
+        }
     }
 }

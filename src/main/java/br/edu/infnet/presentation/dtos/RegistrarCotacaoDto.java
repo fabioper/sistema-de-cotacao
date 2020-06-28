@@ -2,7 +2,6 @@ package br.edu.infnet.presentation.dtos;
 
 import lombok.Data;
 
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -10,8 +9,7 @@ import javax.validation.constraints.NotNull;
 public class RegistrarCotacaoDto {
 
     @NotNull
-    @Min(0)
-    private Long valor;
+    private Double valor;
 
     @NotNull
     private Long idProduto;

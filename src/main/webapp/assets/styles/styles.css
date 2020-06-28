@@ -53,6 +53,15 @@ body {
     justify-content: space-between;
 }
 
+.header .logo a {
+    color: var(--color-foreground);
+    text-decoration: none;
+}
+
+.header .logo a:hover {
+    opacity: .85;
+}
+
 .menu {
     display: flex;
     align-items: center;
